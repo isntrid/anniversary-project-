@@ -49,10 +49,11 @@ def search_messages(msgs, word):
     return matches
 
 msgs_from_csv = load_messages()
-inp = input()
+inp = input('What would you like to search for?')
 print("Total words:", average_words(msgs_from_csv))
 found = search_messages(msgs_from_csv, inp)
 print(f"Found {len(found)} messages containing '{inp}':")
 for f in found[:5]:  # show first 5 matches
     print(f)
+
 
