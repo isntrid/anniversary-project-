@@ -3,16 +3,11 @@ import json
 import re
 import csv
 
-# -------------------
-# Part 1: Load messages from JSON files
-# -------------------
-
 messages_path = r"C:\Users\ridn1\Visual Studio Code\anniversary project\Messages"
 json_files = glob.glob(messages_path + '/**/*.json', recursive=True)
 
 msgs = []
 
-# Filter channels by ID and collect messages
 suited = []
 
 for path in json_files:
@@ -23,36 +18,24 @@ for path in json_files:
                 suited.append(path)
 
 for channel_path in suited:
-    # Construct messages.json path
+  
     path = f"{channel_path[:-12]}messages.json"
     with open(path, 'r', encoding='utf-8') as m_file:
         all_messages = json.load(m_file)
         for message in all_messages:
             if "Contents" in message:
-                msgs.append(message["Contents"])  # <- append the content string, not the whole dict
-
-# -------------------
-# Part 2: Save msgs to CSV
-# -------------------
+                msgs.append(message["Contents"])
 
 csv_file = 'comments.csv'
 with open(csv_file, 'w', encoding='utf-8', newline='') as f:
     writer = csv.writer(f)
     for m in msgs:
-        writer.writerow([m])  # each message in a new row
-
-# -------------------
-# Part 3: Load messages from CSV
-# -------------------
+        writer.writerow([m])
 
 def load_messages():
     with open(csv_file, encoding="utf-8") as f:
         msgs = [line.strip() for line in f]
     return msgs
-
-# -------------------
-# Part 4: Analysis functions
-# -------------------
 
 def average_words(msgs):
     if not msgs:
@@ -65,10 +48,6 @@ def search_messages(msgs, word):
     matches = sorted(matches, key=len)
     return matches
 
-# -------------------
-# Example usage
-# -------------------
-
 msgs_from_csv = load_messages()
 inp = input()
 print("Total words:", average_words(msgs_from_csv))
@@ -76,3 +55,4 @@ found = search_messages(msgs_from_csv, inp)
 print(f"Found {len(found)} messages containing '{inp}':")
 for f in found[:5]:  # show first 5 matches
     print(f)
+
