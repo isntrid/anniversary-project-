@@ -10,11 +10,13 @@ msgs = []
 
 suited = []
 
+id_1 = put your id here
+
 for path in json_files:
     if 'channel' in path:
         with open(path, 'r', encoding='utf-8') as channels:
             line = channels.readline()
-            if "1441233100473503805" in line or "798933998499135538" in line:
+            if id_1 in line:
                 suited.append(path)
 
 for channel_path in suited:
